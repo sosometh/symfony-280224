@@ -13,6 +13,12 @@
     </head>
     <body>
         {% include "composants/header.html.twig" %}
-        {% block body %}{% endblock %}
+        {% block body %}
+        <style>
+            body{
+                background-color: #D9D9D9;
+            }
+        </style>
+        {% endblock %}
     </body>
 </html>

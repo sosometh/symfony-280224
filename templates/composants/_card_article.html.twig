@@ -1,0 +1,35 @@
+{% block body %}
+<a class="container" href="{{ path('article_detail_by_id', {id: article.id}) }}">
+    <div class="inside">
+        <h2>{{article.titre}}</h2>
+        <p>{{ article.dateCreation|date('Y-m-d') }}</p>
+    </div>
+    <img src="https://gallerymurciano.com/wp-content/uploads/2023/10/Le-chat-tableau-tim-burton-toile-peinture-dibond-plexiglass.jpg"
+        alt="chat">
+</a>
+
+
+<style>
+    .container {
+        display: flex;
+        height: 150px;
+        flex-basis: 33%;
+        margin-bottom: 25px;
+        margin-top: 25px;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #C4BEBE;
+        flex-basis: 30%;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: x-large;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    img {
+        object-fit: contain;
+        width: 50px;
+    }
+</style>
+
+{% endblock %}

@@ -55,7 +55,8 @@ class AppFixtures extends Fixture
                 ->setUtilisateur($utilisateurs[$faker->numberBetween(0, 49)])
                 ->addCategory($categories[$faker->numberBetween(0, 9)])
                 ->addCategory($categories[$faker->numberBetween(10, 19)])
-                ->addCategory($categories[$faker->numberBetween(20, 29)]);
+                ->addCategory($categories[$faker->numberBetween(20, 29)])
+                ->setImageUrl("https://www.sciencesetavenir.fr/assets/img/2022/05/25/cover-r4x3w1200-628e2f6688732-particularites-chien-border-collie.jpg");
             $manager->persist($article);
         }
         $manager->flush();
