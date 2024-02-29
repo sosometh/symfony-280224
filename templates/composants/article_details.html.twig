@@ -34,6 +34,15 @@ p {
     padding: 15px;
     border-radius: 25px;
 }
+
+.return {
+    background-color: #4A0FF2CC;
+    height: 50px;
+    padding: 15px;
+    align-self: flex-end;
+    border-radius: 6px;
+    color: white;
+}
 </style>
 <h1 class="titre-detail">{{ article.titre }}</h1>
 <div class="container">
@@ -50,5 +59,7 @@ p {
             {% endfor %}
         </div>
     </div>
+    <a class="return" href="{{ path("app_article") }}">Return 🔚</a>
 </div>
+
 {% endblock %}
