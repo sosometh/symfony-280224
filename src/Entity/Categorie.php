@@ -16,6 +16,7 @@ class Categorie
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
+
     public function getId(): ?int
     {
         return $this->id;

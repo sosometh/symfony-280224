@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
@@ -27,13 +25,8 @@ class Utilisateur
     #[ORM\Column(length: 150)]
     private ?string $password = null;
 
-    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'utilisateur')]
-    private Collection $articleId;
-
-    public function __construct()
-    {
-        $this->articleId = new ArrayCollection();
-    }
+    #[ORM\Column(length: 200, nullable: true)]
+    private ?string $urlImage = null;
 
     public function getId(): ?int
     {
@@ -88,32 +81,14 @@ class Utilisateur
         return $this;
     }
 
-    /**
-     * @return Collection<int, Article>
-     */
-    public function getArticleId(): Collection
+    public function getUrlImage(): ?string
     {
-        return $this->articleId;
+        return $this->urlImage;
     }
 
-    public function addArticleId(Article $articleId): static
+    public function setUrlImage(?string $urlImage): static
     {
-        if (!$this->articleId->contains($articleId)) {
-            $this->articleId->add($articleId);
-            $articleId->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticleId(Article $articleId): static
-    {
-        if ($this->articleId->removeElement($articleId)) {
-            // set the owning side to null (unless already changed)
-            if ($articleId->getUtilisateur() === $this) {
-                $articleId->setUtilisateur(null);
-            }
-        }
+        $this->urlImage = $urlImage;
 
         return $this;
     }

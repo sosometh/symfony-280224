@@ -25,16 +25,15 @@ class Article
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateCreation = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'category')]
-    private Collection $categoryId;
+    #[ORM\ManyToOne]
+    private ?Utilisateur $utilisateur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articleId')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?utilisateur $utilisateur = null;
+    #[ORM\ManyToMany(targetEntity: Categorie::class)]
+    private Collection $categories;
 
     public function __construct()
     {
-        $this->categoryId = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,41 +77,38 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection<int, Article>
-     */
-    public function getCategoryId(): Collection
-    {
-        return $this->categoryId;
-    }
-
-    public function addCategoryId(Article $categoryId): static
-    {
-        if (!$this->categoryId->contains($categoryId)) {
-            $this->categoryId->add($categoryId);
-            $categoryId->addCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategoryId(Article $categoryId): static
-    {
-        if ($this->categoryId->removeElement($categoryId)) {
-            $categoryId->removeCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function getUtilisateur(): ?utilisateur
+    public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
     }
 
-    public function setUtilisateur(?utilisateur $utilisateur): static
+    public function setUtilisateur(?Utilisateur $utilisateur): static
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): static
+    {
+        $this->categories->removeElement($category);
 
         return $this;
     }
